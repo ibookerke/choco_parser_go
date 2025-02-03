@@ -1,6 +1,8 @@
 package pgx
 
 import (
+	"github.com/jackc/pgx/v5"
+
 	"github.com/ibookerke/choco_parser_go/internal/pkg/trm"
 )
 

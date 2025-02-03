@@ -3,6 +3,8 @@ package pgx
 import (
 	"context"
 
+	"github.com/jackc/pgx/v5"
+
 	"github.com/ibookerke/choco_parser_go/internal/pkg/trm"
 	trmcontext "github.com/ibookerke/choco_parser_go/internal/pkg/trm/context"
 )
