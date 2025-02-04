@@ -6,6 +6,13 @@ import (
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
+// Rest is a configuration for REST API.
+type Rest struct {
+	Port               int      `env:"PORT" env-default:"8004"`
+	Host               string   `env:"HOST" env-default:"0.0.0.0"`
+	AllowedCORSOrigins []string `env:"ALLOWED_CORS_ORIGINS" envSeparator:"," env-default:"*"`
+}
+
 // Project - project configuration.
 type Project struct {
 	Debug       bool   `env:"DEBUG" env-default:"false"`
@@ -38,6 +45,7 @@ type Config struct {
 	Database Database
 	Logger   Logger
 	Choco    Choco
+	Rest     Rest
 }
 
 func Get() (Config, error) {
@@ -57,6 +65,10 @@ func Get() (Config, error) {
 
 	if err := cleanenv.ReadEnv(&config.Choco); err != nil {
 		return config, fmt.Errorf("error reading choco config: %w", err)
+	}
+
+	if err := cleanenv.ReadEnv(&config.Rest); err != nil {
+		return config, fmt.Errorf("error reading rest config: %w", err)
 	}
 
 	return config, nil
